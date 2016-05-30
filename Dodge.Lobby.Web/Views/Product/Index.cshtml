@@ -1,0 +1,24 @@
+﻿@model List<Dodge.Lobby.Web.Models.Product>
+
+@{
+    ViewBag.Title = "Your Products List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Index</h3>
+<ul class="thumbnails" style="list-style:none;">
+    @for (int index = 0; index < Model.Count; index++)
+    {
+        <li class="span4">
+            <div class="thumbnail">
+                <a href="@Model[index].Url" target="_blank" class="thumbnail">
+                    <img data-src="holder.js/75x75" src="~/images/@Model[index].Logo" alt="@Model[index].Name" />
+                </a>
+                <div class="caption">
+                    <h4><a href="@Model[index].Url" target="_blank"> @Model[index].Name</a></h4>
+                </div>
+            </div>
+        </li>        
+    }
+</ul>
+

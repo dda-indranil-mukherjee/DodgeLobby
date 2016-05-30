@@ -1,0 +1,34 @@
+﻿@model Dodge.Lobby.Web.Models.UserLoginInfo
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "signin", @class = "navbar-form navbar-right" }))
+{
+    if (Request.IsAuthenticated)
+    {
+        <div class="form-group">
+            Welcome @Html.Encode(User.Identity.Name)
+        </div>
+        <span> | </span>
+        <div class="form-group">
+            @Html.ActionLink("Sign Out", "Logout", "Home")
+        </div>
+    }
+    else
+    {        
+        <div class="form-group">
+            @Html.TextBoxFor(u => u.UserEmail, new { @class = "form-control", placeholder = Html.DisplayNameFor(u => u.UserEmail), required = "required" })
+            @Html.ValidationMessageFor(u => u.UserEmail)
+
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(u => u.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(u => u.Password), required = "required" })
+            @Html.ValidationMessageFor(u => u.Password)
+        </div>
+
+        <input type="submit" class="btn btn-success" value="Log In" />
+        <div>
+            @Html.CheckBoxFor(u => u.Remember)
+            @Html.LabelFor(u => u.Remember, new { @class = "remember-label" })
+        </div>
+        @Html.ValidationSummary(true, "Login failed", new { @class = "alert-danger login-error" });
+    }
+}
